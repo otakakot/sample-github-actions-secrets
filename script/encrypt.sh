@@ -1,15 +1,15 @@
 #!/bin/bash -ue
 
-key=age1tvx0ufxk5vkucmlyzha3xvkw4u29nl8x5u7m43qqv75num7tda2qzzxtt4
+key=age15ejyvpj84w5f42t0v6wnlz86qtnyyrxqx0k9ghtlqr5tfs23tcnsjupyay
 
-secret=$1
+name=$1
 
-if [[ ! -e secret/${secret}.in.txt ]]; then echo "secret/${secret}.in.txt not exists"; exit 1; fi
+if [[ ! -e secret/${name}.in.txt ]]; then echo "secret/${name}.in.txt not exists"; exit 1; fi
 
 sops encrypt \
 	 --age ${key} \
-	 secret/${secret}.in.txt > secret/${secret}.json.tmp
+	 secret/${name}.in.txt > secret/${name}.json.tmp
 
-cat secret/${secret}.json.tmp | jq . > secret/${secret}.enc.json
+cat secret/${name}.json.tmp | jq . > secret/${name}.enc.json
 
-rm secret/${secret}.json.tmp
+rm secret/${name}.json.tmp
